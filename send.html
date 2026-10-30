@@ -1,0 +1,10 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>DÉBLOC — transfert</title></head><body style="font-family:sans-serif;padding:30px">
+<p id="s">Préparation des visuels DÉBLOC…</p>
+<script>
+(async()=>{ const s=document.getElementById('s'); try{
+  const F={}; for(const f of ['DEBLOC_entete.png','DEBLOC_video.mp4']){ const r=await fetch('media/'+f,{cache:'no-store'}); F[f]=await r.arrayBuffer(); }
+  if(!window.opener){ s.textContent='Ouvrez cette page depuis App Store Connect.'; return; }
+  window.opener.postMessage({debloc:true,files:F},'https://appstoreconnect.apple.com');
+  s.textContent='Visuels envoyés. Vous pouvez fermer cet onglet.'; setTimeout(()=>window.close(),1500);
+ }catch(e){ s.textContent='Erreur : '+e; } })();
+</script></body></html>
